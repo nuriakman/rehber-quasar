@@ -1,9 +1,17 @@
 <template>
   <q-page>
 
-    <pre>
-      {{ personeller }}
-    </pre>
+    <ol>
+      <li
+        v-for="personel in personeller"
+        :key="personel.id"
+      >
+        {{ personel.adi_soyadi }},
+        {{ personel.unvan.unvan_adi }},
+        {{ personel.birim.birim_adi }},
+        {{ personel.birim.konumu }}
+      </li>
+    </ol>
 
   </q-page>
 </template>
@@ -18,7 +26,6 @@ const personeller = ref([])
 
 async function getPersonel(params = {}) {
   const { data } = await api.get('http://localhost:8000/api/personel', { params })
-  console.log(data)
   personeller.value = data
 }
 
